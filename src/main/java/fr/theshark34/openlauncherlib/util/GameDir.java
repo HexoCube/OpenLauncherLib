@@ -45,8 +45,7 @@ public class GameDir {
     public static File createGameDir(String serverName) {
         String os = System.getProperty("os.name").toLowerCase();
         if (os.contains("win"))
-            return new File(System.getProperty("user.home")
-                    + "\\AppData\\Roaming\\." + serverName);
+            return new File(System.getenv("APPDATA") + "\\." + serverName);
         else if (os.contains("mac"))
             return new File(System.getProperty("user.home")
                     + "/Library/Application Support/" + serverName);
