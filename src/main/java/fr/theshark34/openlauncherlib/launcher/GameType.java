@@ -200,6 +200,52 @@ public abstract class GameType {
     };
 
     /**
+     * The 1.9 or higher Game Type
+     */
+    public static final GameType V1_9_HIGHER = new GameType() {
+        public String getName() {
+            return "1.9 or higher";
+        }
+
+        public String getMainClass(GameLauncher gameLauncher) {
+            return "net.minecraft.client.main.Main";
+        }
+
+        public ArrayList<String> getLaunchArgs(GameLauncher gameLauncher) {
+            ArrayList<String> arguments = new ArrayList<String>();
+
+            arguments.add("--username=" + gameLauncher.getAuthInfos().getUsername());
+
+            arguments.add("--accessToken");
+            arguments.add(gameLauncher.getAuthInfos().getAccessToken());
+
+            arguments.add("--version");
+            arguments.add(gameLauncher.getGameInfos().getGameVersion().getName());
+
+            arguments.add("--gameDir");
+            arguments.add(gameLauncher.getGameInfos().getGameDir().getAbsolutePath());
+
+            arguments.add("--assetsDir");
+            File assetsDir = new File(gameLauncher.getGameInfos().getGameDir(), gameLauncher.getGameFolder().getAssetsFolder());
+            arguments.add(assetsDir.getAbsolutePath());
+
+            arguments.add("--assetIndex");
+            arguments.add(gameLauncher.getGameInfos().getGameVersion().getName());
+
+            arguments.add("--userProperties");
+            arguments.add("{}");
+
+            arguments.add("--uuid");
+            arguments.add(gameLauncher.getAuthInfos().getUuid());
+
+            arguments.add("--userType");
+            arguments.add("legacy");
+
+            return arguments;
+        }
+    };
+
+    /**
      * The name of the Game Type
      *
      * @return Returns the name of the game type

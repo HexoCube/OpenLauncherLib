@@ -46,7 +46,9 @@ public abstract class GameTweak {
 
         @Override
         public String getTweakClass(GameLauncher gameLauncher) {
-            if(gameLauncher.getGameInfos().getGameVersion().getName().contains("1.8"))
+            if(gameLauncher.getGameInfos().getGameVersion().getName().contains("1.9"))
+                return "net.minecraftforge.fml.common.launcher.FMLTweaker";
+            else if(gameLauncher.getGameInfos().getGameVersion().getName().contains("1.8"))
                 return "net.minecraftforge.fml.common.launcher.FMLTweaker";
             else
                 return "cpw.mods.fml.common.launcher.FMLTweaker";
